@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nova Medical AI | Healthcare Assistant</title>
+<title>Nova Medical AI | Smart Healthcare Assistant</title>
 
 <style>
 :root{
 --bg:#f2f8f6;
---panel:#ffffff;
+--panel:#fff;
 --text:#173b35;
 --muted:#718780;
 --border:#dfebe6;
@@ -16,7 +16,6 @@
 --soft:#e3f5ef;
 --shadow:0 5px 25px rgba(20,80,65,.07);
 }
-
 body.dark{
 --bg:#101d1a;
 --panel:#192a25;
@@ -27,731 +26,254 @@ body.dark{
 --soft:#244238;
 --shadow:0 5px 25px rgba(0,0,0,.2);
 }
-
 *{box-sizing:border-box}
-
 body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:Arial,sans-serif;
-height:100vh;
-overflow:hidden;
+margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,sans-serif;height:100vh;overflow:hidden;
 }
-
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-
-.app{
-display:flex;
-width:100%;
-height:100vh;
-}
-
-/* SIDEBAR */
-
+.app{display:flex;width:100%;height:100vh}
 .sidebar{
-width:265px;
-background:var(--panel);
+width:265px;background:var(--panel);
 border-right:1px solid var(--border);
-display:flex;
-flex-direction:column;
-padding:20px;
-flex-shrink:0;
-z-index:10;
+display:flex;flex-direction:column;padding:20px;
+flex-shrink:0;z-index:10;
 }
-
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:28px;
-}
-
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
 .logo{
-width:45px;
-height:45px;
+width:45px;height:45px;
 background:linear-gradient(135deg,#08b58c,#08765f);
-color:white;
-display:grid;
-place-items:center;
-border-radius:14px;
-font-size:25px;
+color:white;display:grid;place-items:center;
+border-radius:14px;font-size:25px;
 }
-
-.brand h2{
-margin:0;
-font-size:18px;
-}
-
-.brand small{
-color:var(--muted);
-font-size:11px;
-}
-
+.brand h2{margin:0;font-size:18px}
+.brand small{color:var(--muted);font-size:11px}
 .new-chat{
-background:var(--accent);
-color:white;
-border:0;
-border-radius:10px;
-padding:13px;
-font-weight:bold;
+background:var(--accent);color:white;border:0;
+border-radius:10px;padding:13px;font-weight:bold;
 margin-bottom:24px;
 }
-
 .section-title{
-font-size:11px;
-color:var(--muted);
-font-weight:bold;
-letter-spacing:1px;
-margin-bottom:12px;
+font-size:11px;color:var(--muted);
+font-weight:bold;letter-spacing:1px;margin-bottom:12px;
 }
-
-.history{
-flex:1;
-overflow-y:auto;
-}
-
+.history{flex:1;overflow-y:auto}
 .history-item{
-display:flex;
-align-items:center;
-gap:8px;
-padding:11px;
-border-radius:9px;
-cursor:pointer;
-font-size:13px;
-color:var(--muted);
+display:flex;align-items:center;gap:8px;
+padding:11px;border-radius:9px;cursor:pointer;
+font-size:13px;color:var(--muted);
 }
-
-.history-item:hover,
-.history-item.active{
-background:var(--soft);
-color:var(--text);
+.history-item:hover,.history-item.active{
+background:var(--soft);color:var(--text);
 }
-
 .history-item span{
-flex:1;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
+flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-
-.delete-chat{
-background:none;
-border:0;
-color:var(--muted);
-}
-
-.sidebar-bottom{
-border-top:1px solid var(--border);
-padding-top:14px;
-}
-
+.delete-chat{background:none;border:0;color:var(--muted)}
+.sidebar-bottom{border-top:1px solid var(--border);padding-top:14px}
 .side-btn{
-width:100%;
-border:0;
-background:none;
-color:var(--muted);
-text-align:left;
-padding:12px;
-border-radius:9px;
+width:100%;border:0;background:none;color:var(--muted);
+text-align:left;padding:12px;border-radius:9px;
 }
-
-.side-btn:hover{
-background:var(--soft);
-color:var(--text);
-}
-
-/* MAIN */
-
-.main{
-flex:1;
-min-width:0;
-display:flex;
-flex-direction:column;
-}
-
+.side-btn:hover{background:var(--soft);color:var(--text)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
 .topbar{
-height:68px;
-background:var(--panel);
+height:68px;background:var(--panel);
 border-bottom:1px solid var(--border);
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 25px;
-flex-shrink:0;
+display:flex;justify-content:space-between;
+align-items:center;padding:0 25px;flex-shrink:0;
 }
-
-.top-left{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.topbar h3{
-font-size:15px;
-margin:0;
-}
-
-.top-actions{
-display:flex;
-gap:8px;
-align-items:center;
-}
-
+.top-left,.top-actions{display:flex;align-items:center;gap:10px}
+.topbar h3{font-size:15px;margin:0}
 .model-select{
-max-width:190px;
-background:var(--bg);
-color:var(--text);
-border:1px solid var(--border);
-padding:9px;
-border-radius:9px;
+max-width:190px;background:var(--bg);color:var(--text);
+border:1px solid var(--border);padding:9px;border-radius:9px;
 }
-
 .icon-btn{
-width:38px;
-height:38px;
-border:1px solid var(--border);
-border-radius:10px;
-background:var(--panel);
-color:var(--text);
+width:38px;height:38px;border:1px solid var(--border);
+border-radius:10px;background:var(--panel);color:var(--text);
 }
-
-/* CHAT AREA */
-
-.chat-area{
-flex:1;
-overflow-y:auto;
-padding:25px 18px;
-}
-
-.messages{
-max-width:1000px;
-margin:auto;
-}
-
-/* MEDICAL DASHBOARD */
-
-.medical-home{
-width:100%;
-}
-
+.chat-area{flex:1;overflow-y:auto;padding:25px 18px}
+.messages{max-width:1000px;margin:auto}
 .hero{
 background:linear-gradient(120deg,#087c67,#0caf85);
-border-radius:20px;
-padding:32px;
-color:white;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
-position:relative;
-overflow:hidden;
-box-shadow:0 8px 25px rgba(8,124,103,.15);
+border-radius:20px;padding:32px;color:white;
+display:flex;align-items:center;justify-content:space-between;
+gap:20px;box-shadow:0 8px 25px rgba(8,124,103,.15);
 }
-
-.hero-content{
-max-width:650px;
-position:relative;
-z-index:1;
-}
-
+.hero-content{max-width:650px}
 .hero-tag{
-display:inline-block;
-background:#ffffff25;
-padding:7px 12px;
-border-radius:30px;
-font-size:11px;
+display:inline-block;background:#ffffff25;
+padding:7px 12px;border-radius:30px;font-size:11px;
 margin-bottom:15px;
 }
-
-.hero h1{
-font-size:32px;
-line-height:1.3;
-margin:0 0 12px;
-}
-
-.hero p{
-font-size:14px;
-line-height:1.7;
-color:#e0fff4;
-margin:0 0 20px;
-}
-
+.hero h1{font-size:32px;line-height:1.3;margin:0 0 12px}
+.hero p{font-size:14px;line-height:1.7;color:#e0fff4;margin:0 0 20px}
 .hero-btn{
-background:white;
-color:#087c67;
-border:0;
-border-radius:9px;
-padding:12px 20px;
-font-weight:bold;
+background:white;color:#087c67;border:0;
+border-radius:9px;padding:12px 20px;font-weight:bold;
 }
-
-.hero-icon{
-font-size:100px;
-opacity:.9;
-padding:10px;
-}
-
-.status{
-display:flex;
-align-items:center;
-gap:7px;
-font-size:12px;
-color:#e1fff4;
-margin-top:18px;
-}
-
-.status-dot{
-width:8px;
-height:8px;
-background:#75ffc1;
-border-radius:50%;
-}
-
-/* SECTION */
-
-.section-heading{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:28px 0 15px;
-}
-
-.section-heading h2{
-font-size:19px;
-margin:0;
-}
-
-.section-heading p{
-color:var(--muted);
-font-size:12px;
-margin:5px 0 0;
-}
-
-/* MEDICAL CARDS */
-
+.hero-icon{font-size:90px}
+.status{display:flex;align-items:center;gap:7px;font-size:12px;margin-top:18px}
+.status-dot{width:8px;height:8px;background:#75ffc1;border-radius:50%}
+.section-heading{margin:28px 0 15px}
+.section-heading h2{font-size:19px;margin:0}
+.section-heading p{color:var(--muted);font-size:12px;margin:5px 0}
 .medical-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
+display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
 }
-
 .med-card{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:15px;
-padding:20px;
-cursor:pointer;
-transition:.2s;
-min-height:145px;
+background:var(--panel);border:1px solid var(--border);
+border-radius:15px;padding:20px;cursor:pointer;
+transition:.2s;min-height:145px;
 }
-
 .med-card:hover{
-transform:translateY(-3px);
-border-color:var(--accent);
+transform:translateY(-3px);border-color:var(--accent);
 box-shadow:var(--shadow);
 }
-
 .med-icon{
-width:43px;
-height:43px;
-background:var(--soft);
-border-radius:12px;
-display:grid;
-place-items:center;
-font-size:23px;
-margin-bottom:13px;
+width:43px;height:43px;background:var(--soft);
+border-radius:12px;display:grid;place-items:center;
+font-size:23px;margin-bottom:13px;
 }
-
-.med-card h3{
-font-size:14px;
-margin:0 0 7px;
-}
-
-.med-card p{
-font-size:12px;
-line-height:1.6;
-color:var(--muted);
-margin:0;
-}
-
-/* SEARCH */
-
+.med-card h3{font-size:14px;margin:0 0 7px}
+.med-card p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
 .search-section{
-margin-top:28px;
-background:var(--panel);
-border:1px solid var(--border);
-padding:20px;
-border-radius:16px;
+margin-top:28px;background:var(--panel);
+border:1px solid var(--border);padding:20px;border-radius:16px;
 }
-
-.search-section h3{
-font-size:16px;
-margin:0 0 7px;
-}
-
-.search-section p{
-color:var(--muted);
-font-size:12px;
-}
-
-.search-box{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
+.search-section h3{font-size:16px;margin:0 0 7px}
+.search-section p{color:var(--muted);font-size:12px}
+.search-box{display:flex;gap:10px;margin-top:15px}
 .search-box input{
-flex:1;
-min-width:0;
-padding:13px;
-border:1px solid var(--border);
-background:var(--bg);
-color:var(--text);
-border-radius:10px;
-outline:none;
+flex:1;min-width:0;padding:13px;
+border:1px solid var(--border);background:var(--bg);
+color:var(--text);border-radius:10px;outline:none;
 }
-
 .search-box button{
-background:var(--accent);
-color:white;
-border:0;
-border-radius:10px;
-padding:0 20px;
+background:var(--accent);color:white;border:0;
+border-radius:10px;padding:0 20px;
 }
-
-/* NOTICE */
-
 .health-notice{
-margin-top:20px;
-background:var(--soft);
-padding:15px;
-border-radius:12px;
-font-size:12px;
-line-height:1.7;
-color:var(--muted);
-margin-bottom:10px;
+margin-top:20px;background:var(--soft);padding:15px;
+border-radius:12px;font-size:12px;line-height:1.7;
+color:var(--muted);margin-bottom:10px;
 }
-
-.health-notice strong{
-color:var(--text);
-}
-
-/* CHAT MESSAGES */
-
-.message{
-display:flex;
-gap:12px;
-margin:20px 0;
-align-items:flex-start;
-}
-
+.health-notice strong{color:var(--text)}
+.message{display:flex;gap:12px;margin:22px 0;align-items:flex-start}
 .avatar{
-width:36px;
-height:36px;
-flex-shrink:0;
-border-radius:12px;
-display:grid;
-place-items:center;
-background:var(--soft);
-font-size:18px;
+width:36px;height:36px;flex-shrink:0;border-radius:12px;
+display:grid;place-items:center;background:var(--soft);font-size:18px;
 }
-
-.message.user .avatar{
-background:var(--accent);
-color:white;
-}
-
-.content{
-flex:1;
-min-width:0;
-}
-
-.name{
-font-size:12px;
-font-weight:bold;
-margin:3px 0 8px;
-}
-
-.bubble{
-font-size:14px;
-line-height:1.8;
-overflow-wrap:anywhere;
-}
-
+.message.user .avatar{background:var(--accent);color:white}
+.content{flex:1;min-width:0}
+.name{font-size:12px;font-weight:bold;margin:3px 0 8px}
+.bubble{font-size:14px;line-height:1.8;overflow-wrap:anywhere}
 .message.user .bubble{
-display:inline-block;
-background:var(--accent);
-color:white;
-padding:11px 15px;
-border-radius:14px;
+display:inline-block;background:var(--accent);color:white;
+padding:11px 15px;border-radius:14px;
 }
-
 .bubble p{margin:0 0 10px}
 .bubble ul,.bubble ol{padding-left:22px}
-
 .bubble pre{
-background:#17221f;
-color:white;
-padding:14px;
-border-radius:10px;
-overflow:auto;
+background:#17221f;color:white;padding:14px;
+border-radius:10px;overflow:auto;
 }
-
-.bubble code{
-background:var(--soft);
-padding:3px 5px;
-border-radius:4px;
-}
-
-.bubble a{
-color:var(--accent);
-}
-
-.actions{
-margin-top:8px;
-}
-
+.bubble code{background:var(--soft);padding:3px 5px;border-radius:4px}
+.bubble a{color:var(--accent)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .action-btn{
-background:none;
-border:0;
-color:var(--muted);
-font-size:12px;
-}
-
-.typing{
-padding:12px;
-color:var(--muted);
-font-size:13px;
-}
-
-/* COMPOSER */
-
-.composer-wrap{
-padding:10px 18px 15px;
-background:var(--bg);
-flex-shrink:0;
-}
-
-.composer{
-max-width:950px;
-margin:auto;
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:16px;
-box-shadow:var(--shadow);
-padding:12px;
-}
-
-#prompt{
-width:100%;
-min-height:45px;
-max-height:130px;
-resize:none;
-border:0;
-outline:0;
-background:transparent;
-color:var(--text);
-padding:8px;
-font-size:14px;
-}
-
-.composer-bottom{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.composer-bottom small{
-color:var(--muted);
-font-size:11px;
-}
-
-.send-btn{
-width:42px;
-height:40px;
-background:var(--accent);
-color:white;
-border:0;
-border-radius:10px;
-font-size:19px;
-}
-
-.send-btn:disabled{
-opacity:.5;
-}
-
-.footer-note{
-text-align:center;
-font-size:10px;
-color:var(--muted);
-margin-top:8px;
-}
-
-/* SETTINGS */
-
-.modal-backdrop{
-position:fixed;
-inset:0;
-background:#0008;
-display:none;
-align-items:center;
-justify-content:center;
-z-index:30;
-padding:15px;
-}
-
-.modal-backdrop.show{display:flex}
-
-.modal{
-width:100%;
-max-width:430px;
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:17px;
-padding:22px;
-}
-
-.modal h2{margin:0 0 8px}
-
-.modal p{
-color:var(--muted);
-font-size:12px;
-line-height:1.6;
-}
-
-.field{margin-top:17px}
-
-.field label{
-display:block;
-font-size:12px;
-margin-bottom:8px;
-font-weight:bold;
-}
-
-.field input:not([type=checkbox]){
-width:100%;
-padding:12px;
-border:1px solid var(--border);
-border-radius:9px;
-background:var(--bg);
-color:var(--text);
-}
-
-.modal-buttons{
-display:flex;
-justify-content:flex-end;
-gap:8px;
-margin-top:22px;
-flex-wrap:wrap;
-}
-
-.modal-buttons button{
-padding:10px 13px;
-border:1px solid var(--border);
+background:var(--soft);border:1px solid var(--border);
+color:var(--text);font-size:12px;padding:7px 11px;
 border-radius:8px;
-background:var(--panel);
-color:var(--text);
 }
-
-.primary{
-background:var(--accent)!important;
-color:white!important;
-border:0!important;
+.action-btn:hover{border-color:var(--accent)}
+.typing{padding:12px;color:var(--muted);font-size:13px}
+.composer-wrap{padding:10px 18px 15px;background:var(--bg);flex-shrink:0}
+.composer{
+max-width:950px;margin:auto;background:var(--panel);
+border:1px solid var(--border);border-radius:16px;
+box-shadow:var(--shadow);padding:12px;
 }
-
+#prompt{
+width:100%;min-height:45px;max-height:130px;
+resize:none;border:0;outline:0;background:transparent;
+color:var(--text);padding:8px;font-size:14px;
+}
+.composer-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.composer-bottom small{color:var(--muted);font-size:11px}
+.composer-tools{display:flex;align-items:center;gap:7px}
+.send-btn,.mic-btn{
+width:42px;height:40px;background:var(--accent);
+color:white;border:0;border-radius:10px;font-size:19px;
+}
+.mic-btn{background:var(--soft);color:var(--text);border:1px solid var(--border)}
+.mic-btn.recording{background:#dc3545;color:white;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.send-btn:disabled{opacity:.5}
+.voice-status{
+max-width:950px;margin:7px auto 0;
+font-size:11px;color:var(--muted);min-height:15px;
+}
+.footer-note{text-align:center;font-size:10px;color:var(--muted);margin-top:8px}
+.modal-backdrop{
+position:fixed;inset:0;background:#0008;
+display:none;align-items:center;justify-content:center;
+z-index:30;padding:15px;
+}
+.modal-backdrop.show{display:flex}
+.modal{
+width:100%;max-width:430px;background:var(--panel);
+border:1px solid var(--border);border-radius:17px;padding:22px;
+}
+.modal h2{margin:0 0 8px}
+.modal p{color:var(--muted);font-size:12px;line-height:1.6}
+.field{margin-top:17px}
+.field label{display:block;font-size:12px;margin-bottom:8px;font-weight:bold}
+.field input:not([type=checkbox]){
+width:100%;padding:12px;border:1px solid var(--border);
+border-radius:9px;background:var(--bg);color:var(--text);
+}
+.modal-buttons{display:flex;justify-content:flex-end;gap:8px;margin-top:22px;flex-wrap:wrap}
+.modal-buttons button{
+padding:10px 13px;border:1px solid var(--border);
+border-radius:8px;background:var(--panel);color:var(--text);
+}
+.primary{background:var(--accent)!important;color:white!important;border:0!important}
 #toast{
-position:fixed;
-bottom:25px;
-left:50%;
-transform:translateX(-50%);
-background:#222;
-color:white;
-padding:12px 18px;
-border-radius:10px;
-display:none;
-z-index:50;
-font-size:13px;
+position:fixed;bottom:25px;left:50%;transform:translateX(-50%);
+background:#222;color:white;padding:12px 18px;
+border-radius:10px;display:none;z-index:50;font-size:13px;
 }
-
 .menu-btn{display:none}
-
-/* MOBILE */
-
 @media(max-width:750px){
-
 .sidebar{
-position:fixed;
-left:-280px;
-top:0;
-bottom:0;
-transition:.25s;
-box-shadow:var(--shadow);
+position:fixed;left:-280px;top:0;bottom:0;
+transition:.25s;box-shadow:var(--shadow);
 }
-
 .sidebar.open{left:0}
-
 .menu-btn{display:block}
-
-.topbar{
-height:60px;
-padding:0 10px;
-}
-
+.topbar{height:60px;padding:0 10px}
 .topbar h3{font-size:13px}
-
-.model-select{
-max-width:115px;
-font-size:10px;
-padding:8px 3px;
-}
-
+.model-select{max-width:115px;font-size:10px;padding:8px 3px}
 .top-actions{gap:5px}
-
-.icon-btn{
-width:34px;
-height:34px;
-}
-
-.chat-area{
-padding:15px 11px;
-}
-
-.hero{
-padding:23px 18px;
-}
-
+.icon-btn{width:34px;height:34px}
+.chat-area{padding:15px 11px}
+.hero{padding:23px 18px}
 .hero h1{font-size:23px}
-
 .hero-icon{font-size:55px}
-
 .hero p{font-size:12px}
-
-.medical-grid{
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.med-card{
-padding:13px;
-min-height:145px;
-}
-
+.medical-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+.med-card{padding:13px;min-height:145px}
 .med-card h3{font-size:12px}
 .med-card p{font-size:11px}
-
 .section-heading h2{font-size:17px}
-
 .search-section{padding:14px}
-
 .search-box{gap:6px}
-
 .search-box button{padding:0 12px}
-
 .composer-wrap{padding:8px}
 }
-
 @media(max-width:370px){
 .hero-icon{display:none}
 .medical-grid{grid-template-columns:1fr 1fr}
@@ -760,25 +282,16 @@ min-height:145px;
 </head>
 
 <body>
-
 <div class="app">
 
 <aside class="sidebar" id="sidebar">
-
 <div class="brand">
 <div class="logo">✚</div>
-<div>
-<h2>Nova Medical AI</h2>
-<small>Healthcare Intelligence</small>
-</div>
+<div><h2>Nova Medical AI</h2><small>Healthcare Intelligence</small></div>
 </div>
 
-<button class="new-chat" onclick="newChat()">
-＋ New Medical Chat
-</button>
-
+<button class="new-chat" onclick="newChat()">＋ New Medical Chat</button>
 <div class="section-title">CHAT HISTORY</div>
-
 <div class="history" id="history"></div>
 
 <div class="sidebar-bottom">
@@ -786,37 +299,27 @@ min-height:145px;
 <button class="side-btn" onclick="toggleTheme()">◐ Appearance</button>
 <button class="side-btn" onclick="clearAllChats()">⌫ Clear All Chats</button>
 </div>
-
 </aside>
 
 <main class="main">
-
 <header class="topbar">
-
 <div class="top-left">
 <button class="icon-btn menu-btn" onclick="toggleSidebar()">☰</button>
 <h3>🏥 Medical AI Assistant</h3>
 </div>
-
 <div class="top-actions">
-
 <select class="model-select" id="modelSelect">
-
 <optgroup label="GPT Models">
 <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
 <option value="openai/gpt-oss-120b">GPT OSS 120B</option>
 </optgroup>
-
 <optgroup label="Llama Models">
 <option value="llama-3.3-70b-versatile">Llama 3.3 70B</option>
 <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
 </optgroup>
-
 </select>
-
 <button class="icon-btn" onclick="openSettings()">⚙</button>
 <button class="icon-btn" onclick="toggleTheme()">☼</button>
-
 </div>
 </header>
 
@@ -825,136 +328,140 @@ min-height:145px;
 </section>
 
 <div class="composer-wrap">
-
 <div class="composer">
-
-<textarea
-id="prompt"
-placeholder="Ask Nova Medical AI about diseases, medicines, symptoms..."
-rows="2"></textarea>
-
+<textarea id="prompt" placeholder="Ask Nova Medical AI or use microphone..." rows="2"></textarea>
 <div class="composer-bottom">
 <small>Enter to send · Shift + Enter for new line</small>
+<div class="composer-tools">
+<button class="mic-btn" id="micBtn" title="Speak your question" onclick="toggleMic()">🎙</button>
 <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
 </div>
-
 </div>
-
+</div>
+<div class="voice-status" id="voiceStatus"></div>
 <div class="footer-note">
 Nova Medical AI can make mistakes. Always verify medical advice with a qualified healthcare professional.
 </div>
-
 </div>
-
 </main>
 </div>
 
-<!-- SETTINGS -->
-
 <div class="modal-backdrop" id="settingsModal">
-
 <div class="modal">
-
 <h2>⚙ API Settings</h2>
 <p>Connect your Groq API key.</p>
-
 <div class="field">
 <label>Groq API Key</label>
 <input id="apiKey" type="password" placeholder="gsk_...">
 </div>
-
 <div class="field">
-<label>
-<input type="checkbox" id="showKey" onchange="toggleKeyVisibility()">
-Show API Key
-</label>
+<label><input type="checkbox" id="showKey" onchange="toggleKeyVisibility()"> Show API Key</label>
 </div>
-
 <div class="field">
-<label>
-<input type="checkbox" id="rememberKey">
-Save key on this device
-</label>
+<label><input type="checkbox" id="rememberKey"> Save key on this device</label>
 </div>
-
-<p>For better security, never publish your API key in GitHub files or public repositories.</p>
-
+<p>For security, do not publish your API key in public repositories.</p>
 <div class="modal-buttons">
 <button onclick="closeSettings()">Cancel</button>
 <button onclick="removeKey()">Remove Key</button>
 <button class="primary" onclick="saveKey()">Save Key</button>
 </div>
-
 </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-
 const API_URL="https://api.groq.com/openai/v1/chat/completions";
 
 const SYSTEM_PROMPT=`
-You are Nova Medical AI, a knowledgeable multilingual medical education assistant.
+You are Nova Medical AI, a highly professional, knowledgeable, multilingual medical education assistant.
 
-MAIN AREAS:
-1. Human anatomy and physiology.
-2. Diseases and medical conditions.
-3. Symptoms and possible causes.
-4. Medicines and their general uses.
-5. Medicine side effects and precautions.
-6. Drug interactions.
-7. Nutrition and vitamins.
-8. Medical science.
-9. First aid.
-10. Blood tests and laboratory reports.
-11. Heart, brain, liver, lungs and kidney health.
-12. Common infections.
-13. Healthy lifestyle.
-14. General health education.
+PERSONALITY:
+- Communicate like a professional healthcare educator.
+- Be friendly, respectful, confident and empathetic.
+- Give clear, detailed and well-organized answers.
+- Explain medical terminology in simple language.
+- Avoid unnecessary repetition and vague answers.
+- Never pretend to be a real doctor.
 
 LANGUAGE:
-Always reply in the language used by the user.
-Support Hindi and English.
-Use simple Hindi for Hindi questions.
-Never randomly change language.
+- Always respond in the language used by the user.
+- Support Hindi and English.
+- For Hindi questions, use natural and simple Hindi.
+- For English questions, use professional, understandable English.
+- Do not randomly change languages.
+
+ANSWER QUALITY:
+- Understand the complete question before answering.
+- Give direct answers first.
+- Use headings, numbered steps and bullet points when helpful.
+- Explain complicated concepts with examples.
+- If the question is unclear, ask a relevant clarification.
+- Never invent facts, research, references or medical information.
+
+MEDICAL KNOWLEDGE:
+Cover anatomy, physiology, diseases, symptoms, diagnosis, medicines,
+side effects, interactions, nutrition, vitamins, laboratory reports,
+first aid, heart health, brain health, liver, kidneys, lungs and infections.
 
 DISEASE QUESTIONS:
-Explain what the disease is, its causes, symptoms, diagnosis, treatment options, prevention and when to consult a doctor.
+Explain:
+1. What the disease is.
+2. Causes and risk factors.
+3. Common symptoms.
+4. How it is diagnosed.
+5. General treatment options.
+6. Prevention and precautions.
+7. When to consult a doctor.
 
 MEDICINE QUESTIONS:
-Explain generic name if known, general uses, how it works, common side effects, precautions and possible interactions.
-
-Never invent medicine information.
-Never prescribe personalized medicine doses.
-Do not recommend starting, stopping or changing prescribed medicines without medical supervision.
+Explain generic name if known, general uses, mechanism,
+common side effects, precautions and possible interactions.
+Never invent drug information.
+Never prescribe personalized doses.
+Never recommend starting, stopping or changing prescribed medicines
+without medical supervision.
 
 SYMPTOMS:
-Explain possible causes.
-Make clear that symptoms alone cannot confirm a diagnosis.
-Recommend appropriate medical evaluation.
+Explain possible causes and relevant warning signs.
+Clearly state that symptoms alone cannot confirm a diagnosis.
+Do not claim a confirmed diagnosis.
+
+LAB REPORTS:
+Explain the test, its purpose, common reference ranges where appropriate,
+and why results must be interpreted with age, symptoms and clinical context.
+
+VOICE FRIENDLY RESPONSES:
+Use natural sentences that sound clear when read aloud.
+Avoid excessive symbols, tables and unnecessary formatting.
+Explain abbreviations in full when first introduced.
+
+EMERGENCIES:
+For severe breathing difficulty, suspected heart attack, stroke,
+unconsciousness, severe bleeding or poisoning, advise immediate emergency care.
+In India, emergency number 112 can be used.
+Never delay emergency treatment.
 
 SAFETY:
 You are not a licensed doctor.
-Never claim to provide a confirmed diagnosis.
+Your information is educational and does not replace medical consultation.
+Be particularly careful with children, pregnancy and elderly patients.
 Never guarantee a cure.
-Be careful with children, pregnancy and elderly patients.
 
-EMERGENCIES:
-For severe breathing difficulty, suspected heart attack, stroke, unconsciousness, severe bleeding or poisoning, advise immediate emergency care.
-In India, emergency number 112 can be used.
-Do not delay emergency treatment.
+GENERAL KNOWLEDGE:
+You may also answer education, science, mathematics, coding and
+general knowledge questions professionally.
 
-GENERAL QUESTIONS:
-You can also answer education, science, mathematics, coding and general knowledge questions.
-
-Give clear, informative and organized answers.
-Always be friendly, accurate and responsible.
+Always prioritize accuracy, clarity and patient safety.
 `;
 
 let chats=[];
 let currentChatId=null;
 let busy=false;
+let recognition=null;
+let isRecording=false;
+let currentUtterance=null;
 
 const $=id=>document.getElementById(id);
 
@@ -967,59 +474,43 @@ function toast(message){
 const el=$("toast");
 el.textContent=message;
 el.style.display="block";
-
 clearTimeout(window.toastTimer);
-
-window.toastTimer=setTimeout(()=>{
-el.style.display="none";
-},2600);
+window.toastTimer=setTimeout(()=>el.style.display="none",2600);
 }
 
 function saveChats(){
 try{
 localStorage.setItem("nova_chats",JSON.stringify(chats));
-}catch(e){
-toast("Chat storage full");
-}
+}catch(e){toast("Chat storage full");}
 }
 
 function loadChats(){
-
 try{
 chats=JSON.parse(localStorage.getItem("nova_chats")||"[]");
 if(!Array.isArray(chats))chats=[];
-}catch(e){
-chats=[];
-}
+}catch(e){chats=[];}
 
 if(chats.length){
 currentChatId=chats[0].id;
 renderHistory();
 renderMessages();
-}else{
-newChat();
-}
-
+}else newChat();
 }
 
 function newChat(){
-
+stopSpeaking();
 currentChatId=Date.now().toString();
-
 chats.unshift({
 id:currentChatId,
 title:"New Medical Chat",
 messages:[],
 time:Date.now()
 });
-
 saveChats();
 renderHistory();
 renderMessages();
-
 $("sidebar").classList.remove("open");
 $("prompt").focus();
-
 }
 
 function currentChat(){
@@ -1027,15 +518,10 @@ return chats.find(c=>c.id===currentChatId);
 }
 
 function renderHistory(){
-
 $("history").innerHTML="";
-
 chats.forEach(chat=>{
-
 const row=document.createElement("div");
-
-row.className="history-item"+
-(chat.id===currentChatId?" active":"");
+row.className="history-item"+(chat.id===currentChatId?" active":"");
 
 const title=document.createElement("span");
 title.textContent="▤ "+chat.title;
@@ -1043,75 +529,50 @@ title.textContent="▤ "+chat.title;
 const del=document.createElement("button");
 del.className="delete-chat";
 del.textContent="×";
-
 del.onclick=e=>{
 e.stopPropagation();
 deleteChat(chat.id);
 };
 
 row.append(title,del);
-
 row.onclick=()=>{
+stopSpeaking();
 currentChatId=chat.id;
 renderHistory();
 renderMessages();
 $("sidebar").classList.remove("open");
 };
-
 $("history").appendChild(row);
-
 });
-
 }
 
 function deleteChat(id){
-
 chats=chats.filter(c=>c.id!==id);
-
-if(currentChatId===id){
-currentChatId=chats[0]?.id||null;
-}
-
+if(currentChatId===id)currentChatId=chats[0]?.id||null;
 saveChats();
-
-if(!currentChatId){
-newChat();
-}else{
+if(!currentChatId)newChat();
+else{
 renderHistory();
 renderMessages();
 }
-
 }
 
 function clearAllChats(){
-
 if(!confirm("Delete all chat history?"))return;
-
 chats=[];
 currentChatId=null;
-
 localStorage.removeItem("nova_chats");
-
 newChat();
-
 toast("All chats cleared");
-
 }
 
 function escapeHTML(str){
-
 return String(str).replace(/[&<>"']/g,c=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
 }[c]));
-
 }
 
 function formatText(text){
-
 let s=escapeHTML(text);
 
 s=s.replace(/```([\w+-]*)\n?([\s\S]*?)```/g,
@@ -1131,181 +592,107 @@ s=s.replace(/^## (.*)$/gm,"<h2>$1</h2>");
 s=s.replace(/^# (.*)$/gm,"<h1>$1</h1>");
 
 s=s.replace(/^\s*[-*] (.*)$/gm,"<li>$1</li>");
-
 s=s.replace(/(<li>.*<\/li>)/gs,"<ul>$1</ul>");
 
 s=s.split(/\n{2,}/).map(part=>{
-
 if(/^<(h[1-3]|pre|ul)/.test(part))return part;
-
 return "<p>"+part.replace(/\n/g,"<br>")+"</p>";
-
 }).join("");
 
 return s;
-
 }
 
 /* MEDICAL DASHBOARD */
 
 function dashboardHTML(){
-
 return `
-
 <div class="medical-home">
-
 <div class="hero">
-
 <div class="hero-content">
-
 <span class="hero-tag">✚ AI POWERED HEALTHCARE</span>
-
 <h1>Your Health.<br>Your Knowledge.<br>Your Medical AI.</h1>
-
-<p>
-Welcome to Nova Medical AI.
-Get educational information about diseases,
-medicines, symptoms, nutrition and human health.
-</p>
-
-<button class="hero-btn" onclick="focusSearch()">
-Start Medical Consultation →
-</button>
-
-<div class="status">
-<span class="status-dot"></span>
-Medical AI Assistant Ready
+<p>Welcome to Nova Medical AI. Get educational information about diseases,
+medicines, symptoms, nutrition and human health.</p>
+<button class="hero-btn" onclick="focusSearch()">Start Medical Consultation →</button>
+<div class="status"><span class="status-dot"></span> Medical AI Assistant Ready</div>
 </div>
-
-</div>
-
 <div class="hero-icon">🏥</div>
-
 </div>
 
 <div class="section-heading">
-<div>
 <h2>Explore Medical Services</h2>
 <p>Select a medical category to get information.</p>
 </div>
-</div>
 
 <div class="medical-grid">
-
 <div class="med-card" onclick="useSuggestion('Explain diseases, their causes, symptoms, diagnosis and prevention.')">
-<div class="med-icon">🦠</div>
-<h3>Diseases Information</h3>
-<p>Learn about diseases, symptoms, causes and prevention.</p>
-</div>
+<div class="med-icon">🦠</div><h3>Diseases Information</h3>
+<p>Learn about diseases, symptoms, causes and prevention.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain medicines, their general uses, side effects and precautions.')">
-<div class="med-icon">💊</div>
-<h3>Medicine Guide</h3>
-<p>Learn about medicines, uses and possible side effects.</p>
-</div>
+<div class="med-icon">💊</div><h3>Medicine Guide</h3>
+<p>Learn about medicines, uses and possible side effects.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain human anatomy and the functions of different organs.')">
-<div class="med-icon">🫀</div>
-<h3>Human Body</h3>
-<p>Understand organs, body systems and human biology.</p>
-</div>
+<div class="med-icon">🫀</div><h3>Human Body</h3>
+<p>Understand organs, body systems and human biology.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain healthy nutrition, vitamins, minerals and balanced diet.')">
-<div class="med-icon">🥗</div>
-<h3>Nutrition & Diet</h3>
-<p>Understand healthy food, vitamins and nutrition.</p>
-</div>
+<div class="med-icon">🥗</div><h3>Nutrition & Diet</h3>
+<p>Understand healthy food, vitamins and nutrition.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain common symptoms and their possible causes.')">
-<div class="med-icon">🌡️</div>
-<h3>Symptoms Checker</h3>
-<p>Understand possible reasons behind common symptoms.</p>
-</div>
+<div class="med-icon">🌡️</div><h3>Symptoms Checker</h3>
+<p>Understand possible reasons behind common symptoms.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain basic first aid and emergency precautions.')">
-<div class="med-icon">🚑</div>
-<h3>First Aid</h3>
-<p>Learn basic first aid and emergency precautions.</p>
-</div>
+<div class="med-icon">🚑</div><h3>First Aid</h3>
+<p>Learn basic first aid and emergency precautions.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain common blood tests and laboratory reports.')">
-<div class="med-icon">🧪</div>
-<h3>Lab Reports</h3>
-<p>Understand common blood tests and medical reports.</p>
-</div>
+<div class="med-icon">🧪</div><h3>Lab Reports</h3>
+<p>Understand common blood tests and medical reports.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain heart health, blood pressure and cardiovascular health.')">
-<div class="med-icon">❤️</div>
-<h3>Heart Health</h3>
-<p>Learn about heart health and cardiovascular science.</p>
-</div>
+<div class="med-icon">❤️</div><h3>Heart Health</h3>
+<p>Learn about heart health and cardiovascular science.</p></div>
 
 <div class="med-card" onclick="useSuggestion('Explain sleep, exercise, stress management and healthy lifestyle.')">
-<div class="med-icon">🧘</div>
-<h3>Healthy Lifestyle</h3>
-<p>Learn about exercise, sleep and healthy habits.</p>
-</div>
-
+<div class="med-icon">🧘</div><h3>Healthy Lifestyle</h3>
+<p>Learn about exercise, sleep and healthy habits.</p></div>
 </div>
 
 <div class="search-section" id="medicalSearch">
-
 <h3>🔍 Ask Your Medical Question</h3>
-
-<p>
-Search for a disease, medicine, symptom or health topic.
-</p>
-
+<p>Search for a disease, medicine, symptom or health topic.</p>
 <div class="search-box">
-
-<input
-id="medicalInput"
-type="text"
-placeholder="Example: What is diabetes?"
->
-
+<input id="medicalInput" type="text" placeholder="Example: What is diabetes?">
 <button onclick="searchMedical()">Search →</button>
-
 </div>
 </div>
 
 <div class="health-notice">
-
 <strong>⚕ Medical Information Notice</strong><br>
-
 Nova Medical AI provides general educational medical information.
 It does not replace professional medical diagnosis or treatment.
-For emergencies, contact emergency services immediately.
-In India, call 112.
-
+For emergencies, contact emergency services immediately. In India, call 112.
 </div>
-
-</div>
-
-`;
-
+</div>`;
 }
 
 function renderMessages(){
-
 const chat=currentChat();
 const root=$("messages");
-
 root.innerHTML="";
 
 if(!chat||!chat.messages.length){
-
 root.innerHTML=dashboardHTML();
 return;
-
 }
 
-chat.messages.forEach(msg=>{
-
+chat.messages.forEach((msg,index)=>{
 const row=document.createElement("div");
-
-row.className="message "+
-(msg.role==="user"?"user":"assistant");
+row.className="message "+(msg.role==="user"?"user":"assistant");
 
 const avatar=document.createElement("div");
 avatar.className="avatar";
@@ -1325,124 +712,236 @@ bubble.innerHTML=formatText(msg.content);
 content.append(name,bubble);
 
 if(msg.role==="assistant"){
-
 const actions=document.createElement("div");
 actions.className="actions";
 
 const copy=document.createElement("button");
 copy.className="action-btn";
 copy.textContent="▢ Copy";
-
 copy.onclick=()=>copyText(msg.content);
 
-actions.appendChild(copy);
-content.appendChild(actions);
+const speak=document.createElement("button");
+speak.className="action-btn";
+speak.textContent="🔊 Listen";
+speak.onclick=()=>speakText(msg.content);
 
+const stop=document.createElement("button");
+stop.className="action-btn";
+stop.textContent="⏹ Stop";
+stop.onclick=stopSpeaking;
+
+actions.append(copy,speak,stop);
+content.appendChild(actions);
 }
 
 row.append(avatar,content);
 root.appendChild(row);
-
 });
-
 scrollBottom();
-
 }
 
 function focusSearch(){
-
 $("medicalInput")?.focus();
-
-$("medicalSearch")?.scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
+$("medicalSearch")?.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
 function searchMedical(){
-
 const value=$("medicalInput")?.value.trim();
-
 if(!value)return;
-
 $("prompt").value=value;
-
 sendMessage();
-
 }
 
 async function copyText(text){
-
 try{
-
 await navigator.clipboard.writeText(text);
 toast("Copied successfully");
-
-}catch(e){
-
-toast("Clipboard unavailable");
-
-}
-
+}catch(e){toast("Clipboard unavailable");}
 }
 
 function useSuggestion(text){
-
 $("prompt").value=text;
 sendMessage();
-
 }
 
 function scrollBottom(){
-
 $("chatArea").scrollTop=$("chatArea").scrollHeight;
+}
 
+/* TEXT TO SPEECH */
+
+function cleanForSpeech(text){
+return text
+.replace(/```[\s\S]*?```/g," Code block omitted. ")
+.replace(/https?:\/\/\S+/g,"")
+.replace(/[#*_`~]/g,"")
+.replace(/\[([^\]]+)\]\([^)]+\)/g,"$1")
+.replace(/[|]/g," ")
+.replace(/\s+/g," ")
+.trim();
+}
+
+function speakText(text){
+if(!("speechSynthesis" in window)){
+toast("Your browser does not support voice output");
+return;
+}
+
+stopSpeaking();
+
+const cleanText=cleanForSpeech(text);
+const utterance=new SpeechSynthesisUtterance(cleanText);
+
+const hindi=/[\u0900-\u097F]/.test(text);
+utterance.lang=hindi?"hi-IN":"en-IN";
+utterance.rate=0.95;
+utterance.pitch=1;
+utterance.volume=1;
+
+const voices=window.speechSynthesis.getVoices();
+let voice;
+
+if(hindi){
+voice=voices.find(v=>v.lang.toLowerCase().startsWith("hi"));
+}else{
+voice=voices.find(v=>v.lang.toLowerCase()==="en-in")||
+voices.find(v=>v.lang.toLowerCase().startsWith("en"));
+}
+
+if(voice)utterance.voice=voice;
+
+utterance.onstart=()=>{
+$("voiceStatus").textContent="🔊 Nova is speaking...";
+};
+utterance.onend=()=>{
+$("voiceStatus").textContent="";
+};
+utterance.onerror=()=>{
+$("voiceStatus").textContent="";
+};
+
+currentUtterance=utterance;
+window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeaking(){
+if("speechSynthesis" in window){
+window.speechSynthesis.cancel();
+}
+currentUtterance=null;
+$("voiceStatus").textContent="";
+}
+
+/* MICROPHONE INPUT */
+
+function setupRecognition(){
+const SpeechRecognition=
+window.SpeechRecognition||window.webkitSpeechRecognition;
+
+if(!SpeechRecognition)return false;
+
+recognition=new SpeechRecognition();
+recognition.lang="hi-IN";
+recognition.continuous=false;
+recognition.interimResults=true;
+recognition.maxAlternatives=1;
+
+recognition.onstart=()=>{
+isRecording=true;
+$("micBtn").classList.add("recording");
+$("micBtn").textContent="⏹";
+$("voiceStatus").textContent="🎙 Listening... Speak now";
+};
+
+recognition.onresult=e=>{
+let finalText="";
+let interimText="";
+
+for(let i=e.resultIndex;i<e.results.length;i++){
+const transcript=e.results[i][0].transcript;
+if(e.results[i].isFinal)finalText+=transcript;
+else interimText+=transcript;
+}
+
+if(finalText){
+$("prompt").value+=($("prompt").value?" ":"")+finalText;
+$("prompt").dispatchEvent(new Event("input"));
+$("voiceStatus").textContent="✓ Voice captured. Press send to ask.";
+}else if(interimText){
+$("voiceStatus").textContent="🎙 "+interimText;
+}
+};
+
+recognition.onerror=e=>{
+$("voiceStatus").textContent=
+e.error==="not-allowed"?
+"Microphone permission denied. Allow microphone access.":
+"Voice recognition error: "+e.error;
+};
+
+recognition.onend=()=>{
+isRecording=false;
+$("micBtn").classList.remove("recording");
+$("micBtn").textContent="🎙";
+};
+
+return true;
+}
+
+function toggleMic(){
+if(!recognition){
+if(!setupRecognition()){
+toast("Please use Chrome or Edge for microphone support");
+return;
+}
+}
+
+if(isRecording){
+recognition.stop();
+return;
+}
+
+stopSpeaking();
+
+try{
+recognition.lang=/[\u0900-\u097F]/.test($("prompt").value)?"hi-IN":"hi-IN";
+recognition.start();
+}catch(e){
+toast("Microphone is already active or unavailable");
+}
 }
 
 /* SEND MESSAGE */
 
 async function sendMessage(){
-
 if(busy)return;
 
 const input=$("prompt");
 const question=input.value.trim();
-
 if(!question)return;
 
 const key=getKey();
-
 if(!key){
-
 toast("Please enter your Groq API Key");
 openSettings();
 return;
-
 }
 
 let chat=currentChat();
-
 if(!chat){
-
 newChat();
 chat=currentChat();
-
 }
+
+stopSpeaking();
 
 input.value="";
 input.style.height="auto";
 
-chat.messages.push({
-role:"user",
-content:question
-});
+chat.messages.push({role:"user",content:question});
 
 if(chat.messages.length===1){
-
-chat.title=question.slice(0,35)+
-(question.length>35?"...":"");
-
+chat.title=question.slice(0,35)+(question.length>35?"...":"");
 }
 
 saveChats();
@@ -1455,253 +954,181 @@ $("sendBtn").disabled=true;
 const typing=document.createElement("div");
 typing.className="typing";
 typing.id="typing";
-typing.textContent="✚ Nova Medical AI is thinking...";
-
+typing.textContent="✚ Nova Medical AI is preparing your answer...";
 $("messages").appendChild(typing);
 scrollBottom();
 
 try{
-
 const messages=[
-{
-role:"system",
-content:SYSTEM_PROMPT
-},
-
-...chat.messages.map(m=>({
-role:m.role,
-content:m.content
-}))
-
+{role:"system",content:SYSTEM_PROMPT},
+...chat.messages.map(m=>({role:m.role,content:m.content}))
 ];
 
 const response=await fetch(API_URL,{
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Bearer "+key
 },
-
 body:JSON.stringify({
-
 model:$("modelSelect").value,
 messages:messages,
 temperature:0.4,
 max_completion_tokens:2048,
 stream:false
-
 })
-
 });
 
-const data=await response.json();
+let data;
+try{
+data=await response.json();
+}catch(e){
+throw new Error("Invalid response from API");
+}
 
 if(!response.ok){
-
-throw new Error(
-data.error?.message||"API Error: "+response.status
-);
-
+throw new Error(data.error?.message||"API Error: "+response.status);
 }
 
 const answer=data.choices?.[0]?.message?.content;
+if(!answer)throw new Error("Empty response from Groq");
 
-if(!answer){
-
-throw new Error("Empty response from Groq");
-
-}
-
-chat.messages.push({
-role:"assistant",
-content:answer
-});
-
+chat.messages.push({role:"assistant",content:answer});
 saveChats();
 renderMessages();
 renderHistory();
 
 }catch(error){
-
 $("typing")?.remove();
 
 const row=document.createElement("div");
 row.className="message assistant";
 
-row.innerHTML=`
-<div class="avatar">⚠</div>
-<div class="content">
-<div class="name">Connection Error</div>
-<div class="bubble"></div>
-</div>
-`;
+const avatar=document.createElement("div");
+avatar.className="avatar";
+avatar.textContent="⚠";
 
-row.querySelector(".bubble").textContent=error.message;
+const content=document.createElement("div");
+content.className="content";
 
+const name=document.createElement("div");
+name.className="name";
+name.textContent="Connection Error";
+
+const bubble=document.createElement("div");
+bubble.className="bubble";
+bubble.textContent=error.message;
+
+content.append(name,bubble);
+row.append(avatar,content);
 $("messages").appendChild(row);
 scrollBottom();
 
 }finally{
-
 busy=false;
 $("sendBtn").disabled=false;
 input.focus();
-
 }
-
 }
 
 /* API SETTINGS */
 
 function openSettings(){
-
 $("apiKey").value=getKey();
-
-$("rememberKey").checked=
-!!localStorage.getItem("nova_api_key");
-
+$("rememberKey").checked=!!localStorage.getItem("nova_api_key");
 $("settingsModal").classList.add("show");
-
 }
 
 function closeSettings(){
-
 $("settingsModal").classList.remove("show");
-
 }
 
 function saveKey(){
-
 const key=$("apiKey").value.trim();
 
 if(!key){
-
 toast("Enter your API key");
 return;
-
 }
 
 if(!key.startsWith("gsk_")){
-
 toast("Invalid Groq API key format");
 return;
-
 }
 
 if($("rememberKey").checked){
-
 localStorage.setItem("nova_api_key",key);
 sessionStorage.removeItem("nova_api_key");
-
 }else{
-
 sessionStorage.setItem("nova_api_key",key);
 localStorage.removeItem("nova_api_key");
-
 }
 
 closeSettings();
 toast("API Key saved successfully");
-
 }
 
 function removeKey(){
-
 localStorage.removeItem("nova_api_key");
 sessionStorage.removeItem("nova_api_key");
-
 $("apiKey").value="";
-
 closeSettings();
 toast("API Key removed");
-
 }
 
 function toggleKeyVisibility(){
-
-$("apiKey").type=
-$("showKey").checked?"text":"password";
-
+$("apiKey").type=$("showKey").checked?"text":"password";
 }
 
 /* THEME */
 
 function toggleTheme(){
-
 document.body.classList.toggle("dark");
-
 localStorage.setItem(
 "nova_theme",
 document.body.classList.contains("dark")?"dark":"light"
 );
-
 }
 
 function toggleSidebar(){
-
 $("sidebar").classList.toggle("open");
-
 }
 
 /* INPUT EVENTS */
 
 $("prompt").addEventListener("keydown",e=>{
-
 if(e.key==="Enter"&&!e.shiftKey){
-
 e.preventDefault();
 sendMessage();
-
 }
-
 });
 
 $("prompt").addEventListener("input",function(){
-
 this.style.height="auto";
-
-this.style.height=
-Math.min(this.scrollHeight,130)+"px";
-
+this.style.height=Math.min(this.scrollHeight,130)+"px";
 });
 
-/*
-FIX:
-Medical input dashboard ke render hone ke baad hi banta hai.
-Isliye direct null element par listener nahi lagaya gaya.
-Delegated event listener use kiya gaya hai.
-*/
-
 $("messages").addEventListener("keydown",e=>{
-
 if(e.target.id==="medicalInput"&&e.key==="Enter"){
-
 e.preventDefault();
 searchMedical();
-
 }
-
 });
 
 /* START */
 
 function init(){
-
 if(localStorage.getItem("nova_theme")==="dark"){
-
 document.body.classList.add("dark");
-
 }
-
 loadChats();
 
+if("speechSynthesis" in window){
+window.speechSynthesis.getVoices();
+}
 }
 
 init();
-
 </script>
-
 </body>
 </html>
